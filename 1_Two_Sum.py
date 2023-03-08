@@ -8,10 +8,11 @@ You can return the answer in any order.
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        for i1 in range(len(nums)):
-            for i2 in range(i1+1, len(nums)):
-                if nums[i1]+nums[i2] == target:
-                    return [i1, i2]
-                else:
-                    continue
+        hashMap = {}
+        
+        for index, number in enumerate(nums):
+            if (target - number) in hashMap:
+                return [index, hashMap[target - number]]
+            else:
+                hashMap[number] = index
 
