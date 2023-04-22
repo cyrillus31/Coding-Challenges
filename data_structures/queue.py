@@ -59,3 +59,5 @@ if __name__ == '__main__':
     print(f"Value of the head node is: {q.peek()}")
     print(f"Value of the dequed node is: {q.deque()}")
     print(f"Value of the head node is: {q.peek()}")
+
+
