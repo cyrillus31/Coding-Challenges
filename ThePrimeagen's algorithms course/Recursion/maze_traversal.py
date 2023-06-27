@@ -16,7 +16,6 @@ def walk(
         current: tuple, 
         end: tuple, 
         seen: list[list[bool]],
-        # next: tuple,
         wall: str = "#", 
         result: list = []
         ):
@@ -84,6 +83,8 @@ if __name__=="__main__":
     seen = [[False for i in range(len(input[0]))] for i in range(len(input))]
 
     start, end = find_start_and_end(input)
+
     result = (walk(input, start, end, seen, "#", []))
+
     print(f"Resulting path is {result}")
     print_result_map(input)
