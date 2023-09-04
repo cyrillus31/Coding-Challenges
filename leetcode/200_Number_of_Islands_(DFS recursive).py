@@ -12,8 +12,6 @@ grid_2 = [
     ["0", "0", "0", "1", "1"],
 ]
 
-"""Unfinished!!!!"""
-
 
 def numIslands(grid: list[list[str]]) -> int:
     # go through every address
