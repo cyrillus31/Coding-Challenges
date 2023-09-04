@@ -1,0 +1,83 @@
+def check_radius(x, y, board, turn: str) -> bool:
+  # turn can be black "x" or white "o"
+  if turn == "black":
+    opposition = "o"
+  else:
+    opposition = "x"
+    
+  results = []
+
+  directions = {
+    "upright": (-1,1),
+    "downright": (1,1),
+    "downleft": (1,-1),
+    "upleft": (-1,-1)
+  }
+  for direction in directions:
+    # position to check
+    x_modifier = directions[direction][0]
+    y_modifier = directions[direction][1] 
+
+    x_mod = x + x_modifier
+    y_mod = y + y_modifier
+
+    if board[x_mod][y_mod] == opposition:
+      x_modplus = x_mod + x_modifier
+      y_modplus = y_mod + y_modifier
+      if board[x_modplus][y_modplus] not in ["x", "o"]:
+        return True
+  return False
+  
+def generate_board(size: list, whites: list, blacks: list) -> list[list]:
+  board = [["#"]*(size[0]+2) for i in range(size[1]+2)]
+  print(size)
+  print(blacks)
+  print(whites)
+  print(board)
+  # populate whites
+  for position in whites:
+    print(position)
+    x, y = position
+    board[x][y] = "o"
+    
+  for position in blacks:
+    x, y = position
+    board[x][y] = "x"
+  [print(row) for row in board]
+  return board
+
+import sys
+
+size = list(map(int, input().split()))
+amount_whites = int(input())
+
+whites = []
+blacks = []
+
+for i in range(amount_whites):
+  data = list(map(int, input().split()))
+  whites.append(data)
+  
+amount_blacks = int(input())
+for i in range(amount_blacks):
+  data = list(map(int, input().split()))
+  blacks.append(data)
+
+turn = input()
+
+board = generate_board(size, whites, blacks)
+
+if turn == "white":
+  to_check = whites 
+else:
+  to_check = blacks 
+
+flag = "No"
+for position in to_check:
+  x, y = position
+  if check_radius(x, y, board, turn):
+    flag = "Yes"
+    break
+    
+print(flag)
+      
