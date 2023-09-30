@@ -1,40 +1,46 @@
 """Given a string s, find the length of the longest 
 substring without repeating characters.
- """
+"""
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        hashMap = {}
-        result = ""
-        rResult = ""
-        start = 0 
-        end = 0
-        if len(s) == 0:
+        if s == "":
             return 0
-        for index, letter in enumerate(s):
 
-            if letter not in rResult:
-                hashMap[letter] = index
-                end = index + 1
-            
+        elif len(s) == 1:
+            return 1
+
+        hash_table = {}
+        left = 0
+        left_letter = s[left]
+        hash_table[left_letter] = left
+        result = 1
+
+        for right in range(1, len(s)):
+            right_letter = s[right]
+            if right_letter not in hash_table:
+                hash_table[right_letter] = right
             else:
-                start = hashMap[letter]+1
-                hashMap[letter] = index
-                end = index + 1
+                prev = hash_table[right_letter]
+                if prev < left:
+                    pass
+                else:
+                    left = prev + 1
+                hash_table[right_letter] = right
+            length = right + 1 - left
+            if length > result:
+                result = length
+            # print(left, right, length, s[left:right+1])
+            # print(hash_table)
 
-            if end == len(s):
-                end = None
-            rResult = s[start:end]
-            if len(rResult) >= len(result):
-                result = rResult
+        return result
 
-        return len(result)
+
             
-                
-
-
 
 mySolution = Solution()
-s = "abcabcbb"
-print(mySolution.lengthOfLongestSubstring(s))
+inputs = ("abcabcbb", "tmmzuxt", "aabaab!bb")
+
+for result in map(mySolution.lengthOfLongestSubstring, inputs):
+    print(result)
 
